@@ -6,7 +6,7 @@ namespace As00
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            evaluateInput();
         }
 
         public static bool isLeapYear(int year)
@@ -25,6 +25,20 @@ namespace As00
             else 
             {
                 return false;
+            }
+        }
+
+        public static void evaluateInput()
+        {
+            var input = Int32.Parse(Console.ReadLine());
+
+            if (isLeapYear(input))
+            {
+                Console.WriteLine("yay");
+            }
+            else 
+            {
+                Console.WriteLine("nay");
             }
         }
     }
