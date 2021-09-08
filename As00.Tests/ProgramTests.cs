@@ -113,5 +113,45 @@ namespace As00.Tests
             Assert.True(isLeapYear);
 
         }
+
+        [Fact]
+        public void evaluateInput_less_than_1582()
+        {
+            //Arrange
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+
+            var reader = new StringReader("1581");
+            Console.SetIn(reader);
+
+            //Act
+            Program.evaluateInput();
+
+            //Assert
+            var output = writer.GetStringBuilder().ToString().Trim();
+            Assert.Equal("Input year has to be 1582 or greater.", output);
+        }
+
+        [Theory]
+        [InlineData("ABCD")]
+        [InlineData("12A4")]
+        [InlineData("3.14")]
+        [InlineData("1900.0")]
+        public void evaluateInput_input_not_convertible(string input) 
+        {
+            //Arrange
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+
+            var reader = new StringReader(input);
+            Console.SetIn(reader);
+
+            //Act
+            Program.evaluateInput();
+
+            //Assert
+            var output = writer.GetStringBuilder().ToString().Trim();
+            Assert.Equal("Invalid input: Input must be an integer greater than 1582.", output);
+        }
     }
 }
