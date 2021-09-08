@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Xunit;
 
 namespace As00.Tests
@@ -67,6 +68,50 @@ namespace As00.Tests
 
             //Assert
             Assert.True(output);
+        }
+
+        [Fact]
+        public void evaluateInput_returns_yay()
+        {
+            //Arrange
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+
+            var reader = new StringReader("1600");
+            Console.SetIn(reader);
+
+            //Act
+            Program.evaluateInput();
+
+            //Assert
+            var output = writer.GetStringBuilder().ToString().Trim();
+            Assert.Equal("yay", output);
+
+            var isLeapYear = Program.isLeapYear(1600);
+            Assert.True(isLeapYear);
+
+        }
+
+        [Fact]
+        public void evaluateInput_returns_nay()
+        {
+            //Arrange
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+
+            var reader = new StringReader("1900");
+            Console.SetIn(reader);
+
+            //Act
+            Program.evaluateInput();
+
+            //Assert
+            var output = writer.GetStringBuilder().ToString().Trim();
+            Assert.Equal("nay", output);
+
+            var isLeapYear = Program.isLeapYear(1600);
+            Assert.True(isLeapYear);
+
         }
     }
 }
