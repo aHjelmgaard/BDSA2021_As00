@@ -6,6 +6,7 @@ namespace As00
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine("Enter a year to find out if it's a leap year:");
             evaluateInput();
         }
 
@@ -30,16 +31,30 @@ namespace As00
 
         public static void evaluateInput()
         {
-            var input = Int32.Parse(Console.ReadLine());
-
-            if (isLeapYear(input))
+            try
             {
-                Console.WriteLine("yay");
+                var input = Convert.ToInt32(Console.ReadLine());
+                
+                if (input < 1582)
+                {
+                    Console.WriteLine("Input year has to be 1582 or greater.");
+                }
+                else
+                {
+                    if (isLeapYear(input))
+                    {
+                        Console.WriteLine("yay");
+                    }
+                    else 
+                    {
+                        Console.WriteLine("nay");
+                    }
+                }
             }
-            else 
+            catch (FormatException FE)
             {
-                Console.WriteLine("nay");
-            }
+                Console.WriteLine("Invalid input: Input must be an integer greater than 1582.", FE);
+            } 
         }
     }
 }
